@@ -266,10 +266,8 @@ function drush_cache_rebuild() {
   // Manually resemble early bootstrap of DrupalKernel::boot().
   require_once DRUSH_DRUPAL_CORE . '/includes/bootstrap.inc';
   DrupalKernel::bootEnvironment();
-  // Avoid 'Only variables should be passed by reference'
-  $root  = DRUPAL_ROOT;
   $site_path = DrupalKernel::findSitePath($request);
-  Settings::initialize($root, $site_path, $autoloader);
+  Settings::initialize($site_path, $autoloader);
 
   // Use our error handler since _drupal_log_error() depends on an unavailable theme system (ugh).
   set_error_handler('drush_error_handler');
